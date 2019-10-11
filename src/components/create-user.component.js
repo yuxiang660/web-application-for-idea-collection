@@ -80,11 +80,11 @@ export default class CreateUser extends Component {
           </div>
           <FormGroup>
             <Badge color="success">Description</Badge>
-              <Input type="textarea" alue={this.state.description} onChange={this.onChangeDescription} placeholder="Summarize your idea in one sentence, followed up with detailed explanation, including purpose, plan, value." />
+              <Input type="textarea" alue={this.state.description} onChange={this.onChangeDescription} placeholder="Summarize your idea in one sentence, followed up with detailed explanation, including purpose, plan, cost, value." />
           </FormGroup>
           <div className="form-group">
             <Badge color="success">Proposer</Badge>
-              <input type="text" value={this.state.proposer} onChange={this.onChangeProposer} className="form-control" placeholder="E.g. San Zhang"/>
+              <input type="text" value={this.state.proposer} onChange={this.onChangeProposer} className="form-control" placeholder="E.g. San Zhang, Si Li"/>
           </div>
           <div className="form-group">
             <Badge color="success">Department</Badge>
