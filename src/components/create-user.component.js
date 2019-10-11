@@ -36,13 +36,14 @@ export default class CreateUser extends Component {
     e.preventDefault();
     
     const userObject = {
-      name: this.state.name,
+      ideaName: this.state.name,
       description: this.state.description,
       proposer: this.state.proposer,
-      department: this.state.department
+      department: this.state.department,
+      status: 'new'
     };
     
-    axios.post('http://localhost:4000/users/create', userObject).
+    axios.post('http://localhost:4000/ideas/create', userObject).
       then((res) => {
         console.log(res.data);
       }).catch((error) => {
