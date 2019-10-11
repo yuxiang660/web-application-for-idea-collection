@@ -4,38 +4,37 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install`
+```
+.../> npm install
+.../server/> npm install
+```
+Install dependencies for client and server.
+
 ### `npm start`
+```
+.../> npm start
+.../server/> npm start
+```
+client: Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+server: Open [http://localhost:4000/ideas](http://localhost:4000/ideas) to view data from server.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### `MongoDB Compass`
+* install mongodb and ["MongoDB Compass"](https://www.mongodb.com/products/compass)
+* create a database locally, database name: reactaxios, collection name: ideas
 
-### `npm test`
+### `mongoimport`
+```
+.../> mongoimport --db=reactaxios --collection=ideas --file=ideas.json
+```
+Import documents in ideas.json to your mongodb database "reactaxios" in the collection "ideas".
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### `mongoexport`
+```
+.../> mongoexport --db=reactaxios --collection=ideas --out=your-ideas.json
+```
+If you add your own ideas to the database, you can also export them to a JSON file for the back-up.
 
 ## Learn More
 
