@@ -10,13 +10,13 @@ function App() {
     <div className="App">
       <header>
         <nav className="navbar navbar-expand-lg navbar-dark bg-light">
-          <a className="navbar-brand">Idea Collection System</a>
+          <a className="navbar-brand">NI Idea Collection System</a>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
                 <Link className="nav-link bg-dark" to={"/create-idea"}>Create Idea</Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item active">
                 <Link className="nav-link bg-dark" to={"/ideas"}>Idea List</Link>
               </li>
             </ul>
