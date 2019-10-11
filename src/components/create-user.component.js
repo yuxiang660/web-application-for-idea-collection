@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'; 
+import axios from 'axios';
+import { Badge } from 'reactstrap';
+import { Spinner } from 'reactstrap';
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -65,24 +67,25 @@ export default class CreateUser extends Component {
       <div className="wrapper">
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>Idea Name</label>
+            <Badge color="success">Idea Name</Badge >
               <input type="text" value={this.state.name} onChange={this.onChangeUserName} className="form-control" />
           </div>
           <div className="form-group">
-            <label>Description</label>
+            <Badge color="success">Description</Badge>
               <input type="text" value={this.state.description} onChange={this.onChangeDescription} className="form-control" />
           </div>
           <div className="form-group">
-            <label>Proposer</label>
+            <Badge color="success">Proposer</Badge>
               <input type="text" value={this.state.proposer} onChange={this.onChangeProposer} className="form-control" />
           </div>
           <div className="form-group">
-            <label>Department</label>
+            <Badge color="success">Department</Badge>
               <input type="text" value={this.state.department} onChange={this.onChangeDepartment} className="form-control" />
           </div>
           <div className="form-group">
             <input type="submit" value="Create idea" className="btn btn-success btn-block" />
           </div>
+          <Spinner type="grow" color="success" />
         </form>
       </div>
     )
