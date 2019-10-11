@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { Alert } from 'reactstrap';
-
 
 export default class CreateUser extends Component {
   constructor(props) {
