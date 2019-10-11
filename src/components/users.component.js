@@ -122,7 +122,7 @@ export default class Users extends React.Component {
         }
 
         this.setState({
-          ideas: ideasData
+          ideas: ideasData.reverse()
         });
       })
       .catch(function (error){
