@@ -1,26 +1,38 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Alert } from 'reactstrap';
+
 
 export default class CreateUser extends Component {
   constructor(props) {
     super(props);
     
     this.onChangeUserName = this.onChangeUserName.bind(this);
-    this.onChangeUserEmail = this.onChangeUserEmail.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeProposer = this.onChangeProposer.bind(this);
+    this.onChangeDepartment = this.onChangeDepartment.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     
     this.state = {
       name: '',
-      email: ''
+      description: '',
+      proposer: '',
+      department: ''
     };
   }
   
   onChangeUserName(e) {
     this.setState({ name: e.target.value });
   }
-  
-  onChangeUserEmail(e) {
-    this.setState({ email: e.target.value });
+  onChangeDescription(e) {
+    this.setState({ description: e.target.value });
+  }
+  onChangeProposer(e) {
+    this.setState({ proposer: e.target.value });
+  }
+  onChangeDepartment(e) {
+    this.setState({ department: e.target.value });
   }
   
   onSubmit(e) {
@@ -28,7 +40,9 @@ export default class CreateUser extends Component {
     
     const userObject = {
       name: this.state.name,
-      email: this.state.email
+      description: this.state.description,
+      proposer: this.state.proposer,
+      department: this.state.department
     };
     
     axios.post('http://localhost:4000/users/create', userObject).
@@ -38,7 +52,14 @@ export default class CreateUser extends Component {
         console.log(error);
       });
     
-    this.setState({ name: '', email: ''});
+    this.setState(
+      { 
+        name: '', 
+        description: '',
+        proposer: '',
+        department: ''
+      }
+    );
   }
 
   render() {
@@ -46,15 +67,23 @@ export default class CreateUser extends Component {
       <div className="wrapper">
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>Add User Name</label>
+            <label>Idea Name</label>
               <input type="text" value={this.state.name} onChange={this.onChangeUserName} className="form-control" />
           </div>
           <div className="form-group">
-            <label>Add User Email</label>
-              <input type="text" value={this.state.email} onChange={this.onChangeUserEmail} className="form-control" />
+            <label>Description</label>
+              <input type="text" value={this.state.description} onChange={this.onChangeDescription} className="form-control" />
           </div>
           <div className="form-group">
-            <input type="submit" value="Create User" className="btn btn-success btn-block" />
+            <label>Proposer</label>
+              <input type="text" value={this.state.proposer} onChange={this.onChangeProposer} className="form-control" />
+          </div>
+          <div className="form-group">
+            <label>Department</label>
+              <input type="text" value={this.state.department} onChange={this.onChangeDepartment} className="form-control" />
+          </div>
+          <div className="form-group">
+            <input type="submit" value="Create idea" className="btn btn-success btn-block" />
           </div>
         </form>
       </div>
