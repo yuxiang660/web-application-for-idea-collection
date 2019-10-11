@@ -1,47 +1,147 @@
-import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import React from 'react';
 import axios from 'axios';
-import DataTable from './data-table'
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import { Table } from 'reactstrap';
 
-export default class Users extends Component {
+class ProductRow extends React.Component {
+  render() {
+    const idea = this.props.idea;
+    return (
+      <tr>
+        <td><a href="http://www.ni.com">{idea.IdeaName}</a></td>
+        <td>{idea.Description}</td>
+        <td>{idea.Proposer}</td>
+        <td>{idea.Department}</td>
+        <td>{idea.Status}</td>
+      </tr>
+    );
+  }
+}
+
+class ProductTable extends React.Component {
+  render() {
+    const filterText = this.props.filterText;
+
+    const rows = [];
+
+    this.props.ideas.forEach((idea) => {
+      if (
+          (idea.IdeaName.indexOf(filterText) === -1) &&
+          (idea.Description.indexOf(filterText) === -1) &&
+          (idea.Proposer.indexOf(filterText) === -1) &&
+          (idea.Department.indexOf(filterText) === -1) &&
+          (idea.Status.indexOf(filterText) === -1)
+         ){
+        return;
+      }
+      rows.push(
+        <ProductRow
+          idea={idea}
+          key={idea.IdeaName}
+        />
+      );
+    });
+
+    return (
+      <Table hover size="sm" bordered striped >
+        <thead>
+          <tr>
+            <th>Idea Name</th>
+            <th>Brief Description</th>
+            <th>Proposer</th>
+            <th>Department</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </Table>
+    );
+  }
+}
+
+class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { usersCollection: []};
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
   }
   
+  handleFilterTextChange(e) {
+    this.props.onFilterTextChange(e.target.value);
+  }
+  
+  render() {
+    return (
+      <form>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={this.props.filterText}
+          onChange={this.handleFilterTextChange}
+        />
+      </form>
+    );
+  }
+}
+
+export default class Users extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterText: '',
+      ideas: []
+    };
+    
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+  }
+
+  handleFilterTextChange(filterText) {
+    this.setState({
+      filterText: filterText
+    });
+  }
+
   componentDidMount() {
-    axios.get('http://localhost:4000/users')
+    console.log('== componentDidMount ==');
+	
+     axios.get('http://localhost:4000/ideas')
       .then(res => {
-        this.setState({ usersCollection: res.data });
+        console.log(res.data);
+        
+        var ideasData = [];
+        for (var i=0; i<res.data.length; ++i) {
+          console.log(res.data[i]);
+          ideasData.push(
+            {
+              "IdeaName": res.data[i].ideaName, 
+              "Description": res.data[i].description, 
+              "Proposer": res.data[i].proposer, 
+              "Department": res.data[i].department, 
+              "Status": res.data[i].status
+            });
+        }
+
+        this.setState({
+          ideas: ideasData
+        });
       })
       .catch(function (error){
         console.log(error);
       })
   }
   
-  dataTable() {
-    return this.state.usersCollection.map((data, i) => {
-      return <DataTable obj={data} key={i} />
-    })
-  }
-
   render() {
     return (
-      <div className="wrapper-users">
-        <div className="container">
-          <table className="table table-striped table-dark">
-            <thead className="thead-dark">
-              <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Email</td>
-              </tr>
-            </thead>
-            <tbody>
-              {this.dataTable()}
-            </tbody>
-          </table>
-        </div>
+      <div>
+        <SearchBar
+          filterText={this.state.filterText}
+          onFilterTextChange={this.handleFilterTextChange}
+        />
+        <ProductTable
+          ideas={this.state.ideas}
+          filterText={this.state.filterText}
+        />
       </div>
-    )
+    );
   }
-};
+}
