@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Badge } from 'reactstrap';
 import { Button } from 'reactstrap';
+import { FormGroup, Input} from 'reactstrap';
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -54,6 +55,10 @@ export default class CreateUser extends Component {
         console.log(error);
       });
     }
+    else
+    {
+      alert("Empty input! Please fill all the fields.");
+    }
 
     this.setState(
       { 
@@ -73,10 +78,10 @@ export default class CreateUser extends Component {
             <Badge color="success">Idea Name</Badge >
               <input type="text" value={this.state.name} onChange={this.onChangeUserName} className="form-control" placeholder="Give your idea a catching name"/>
           </div>
-          <div className="form-group">
+          <FormGroup>
             <Badge color="success">Description</Badge>
-              <input type="text" value={this.state.description} onChange={this.onChangeDescription} className="form-control" placeholder="Summarize your idea in one sentence"/>
-          </div>
+              <Input type="textarea" alue={this.state.description} onChange={this.onChangeDescription} placeholder="Summarize your idea in one sentence, followed up with detailed explanation, including purpose, plan, value." />
+          </FormGroup>
           <div className="form-group">
             <Badge color="success">Proposer</Badge>
               <input type="text" value={this.state.proposer} onChange={this.onChangeProposer} className="form-control" placeholder="E.g. San Zhang"/>
