@@ -1,8 +1,9 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import axios from 'axios';
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table } from 'reactstrap';
+import { Badge } from 'reactstrap';
+import { Input} from 'reactstrap';
 
 class ProductRow extends React.Component {
   render() {
@@ -72,14 +73,11 @@ class SearchBar extends React.Component {
   
   render() {
     return (
-      <form>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={this.props.filterText}
-          onChange={this.handleFilterTextChange}
-        />
-      </form>
+      <div>
+        <Badge color="success">Seach</Badge>
+        <Input type="text" value={this.props.filterText} onChange={this.handleFilterTextChange} placeholder="Search..." />
+        <br></br>
+      </div>
     );
   }
 }
