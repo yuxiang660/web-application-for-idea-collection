@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <header>
         <nav className="navbar navbar-expand-lg navbar-dark bg-light">
-          <a className="navbar-brand">NI Idea Collection System</a>
+          <a className="navbar-brand">NI Idea Management System</a>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
